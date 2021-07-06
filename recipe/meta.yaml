@@ -13,7 +13,6 @@ source:
 
 build:
   number: 1
-  skip: true  # [win and vc<14]
   # The json library is header only, so we do not need
   # to export the compiler run-time libraries.
   # They are just needed during the build to perform some checks.
@@ -21,30 +20,23 @@ build:
     - libcxx
     - libgcc-ng
     - libstdcxx-ng
-    - vc
-    - vs2015_runtime
 
 requirements:
   build:
-    - cmake
-    - make  # [unix]
+    - cmake {{ cmake }}
+    - make  # [linix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host: []  # Empty host dependency section
 
 test:
   commands:
-    - test -d ${PREFIX}/include/nlohmann  # [unix]
-    - test -f ${PREFIX}/include/nlohmann/json.hpp  # [unix]
-    - test -f ${PREFIX}/include/nlohmann/json_fwd.hpp  # [unix]
-    - test -f ${PREFIX}/lib/cmake/nlohmann_json/nlohmann_jsonConfig.cmake  # [unix]
-    - test -f ${PREFIX}/lib/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake  # [unix]
-    - test -f ${PREFIX}/lib/cmake/nlohmann_json/nlohmann_jsonTargets.cmake  # [unix]
-    - if exist %LIBRARY_PREFIX%\include\nlohmann\json.hpp (exit 0) else (exit 1)  # [win]
-    - if exist %LIBRARY_PREFIX%\include\nlohmann\json_fwd.hpp (exit 0) else (exit 1)  # [win]
-    - if exist %LIBRARY_PREFIX%\lib\cmake\nlohmann_jsonConfig.cmake (exit 0) else (exit 1)  # [win]
-    - if exist %LIBRARY_PREFIX%\lib\cmake\nlohmann_jsonConfigVersion.cmake (exit 0) else (exit 1)  # [win]
-    - if exist %LIBRARY_PREFIX%\lib\cmake\nlohmann_jsonTargets.cmake (exit 0) else (exit 1)  # [win]
+    - test -d ${PREFIX}/include/nlohmann  # [linux]
+    - test -f ${PREFIX}/include/nlohmann/json.hpp  # [linux]
+    - test -f ${PREFIX}/include/nlohmann/json_fwd.hpp  # [linux]
+    - test -f ${PREFIX}/lib/cmake/nlohmann_json/nlohmann_jsonConfig.cmake  # [linux]
+    - test -f ${PREFIX}/lib/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake  # [linux]
+    - test -f ${PREFIX}/lib/cmake/nlohmann_json/nlohmann_jsonTargets.cmake  # [linux]
 
 about:
   home: http://github.com/nlohmann/json
@@ -58,7 +50,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - constantinpape
-    - SylvainCorlay
-    - JohanMabille
-    - wolfv
+    - open-ce/open-ce-dev-team
