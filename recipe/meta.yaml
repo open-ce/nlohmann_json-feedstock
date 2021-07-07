@@ -24,7 +24,7 @@ build:
 requirements:
   build:
     - cmake {{ cmake }}
-    - make  # [linix]
+    - make  # [linux]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host: []  # Empty host dependency section
